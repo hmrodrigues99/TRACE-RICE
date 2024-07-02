@@ -26,7 +26,7 @@
 
 ## Set working directory
 
-setwd("C:/Users/TRACE_Rice/Documents/Rice_Philogeny2/High Impact Variants")     # Change working directory here
+setwd("C:/Users/TRACE_Rice/Documents/Projects/RScripts")     # Change working directory here
 
 ## ---------------------------------------------------------
 
@@ -55,7 +55,8 @@ seed_QTLs <- seed_QTLs[,1:4]
 
 # Prepare output table header
 
-output <- data.frame(Chr=integer(), Pos=integer(), Eating_Quality_QTL=character(), Seed_QTL=character(), Annotation=character())
+output <- data.frame(Chr=integer(), Pos=integer(), Eating_Quality_QTL=character(),
+                     Seed_QTL=character(), Annotation=character())
 
 # Define a list for the multiple chromosomes, SNP positions and annotations
 
@@ -96,7 +97,8 @@ Gene_ID <- split$Annotation$X5
 Transcript_ID <- split$Annotation$X7
 
 final_output <- cbind(Gene_ID, Gene_Name, Transcript_ID, core, Modification)
-final_output <- final_output[, c("Gene_ID", "Gene_Name", "Transcript_ID", "Chr", "Pos", "Modification", "Eating_Quality_QTL", "Seed_QTL")]
+final_output <- final_output[, c("Gene_ID", "Gene_Name", "Transcript_ID", "Chr", "Pos",
+                                 "Modification", "Eating_Quality_QTL", "Seed_QTL")]
 
 # Write final output table
 
