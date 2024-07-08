@@ -37,10 +37,12 @@ for i in $(ls -1 *_1.fastq.gz) ;
 
 do
 
+# Create a specific directory for each sample/variety
 variety=${i%_1.fastq.gz}
+mkdir align_${variety}
 
 echo "aligning ${variety}"
 
-bwa mem -t 10 ../../genome/Oryza_sativa.IRGSP-1.0.dna.toplevel.fa  ${variety}_1.fastq.gz ${variety}_2.fastq.gz > ${variety}.sam
+bwa mem -t 10 ../../genome/Oryza_sativa.IRGSP-1.0.dna.toplevel.fa  ${variety}_1.fastq.gz ${variety}_2.fastq.gz > align_${variety}/${variety}.sam
 
 done
