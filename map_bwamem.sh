@@ -2,7 +2,7 @@
 ```
 ---------------------------------------------------------
 
-Script name: Variant_Enrichment.R
+Script name: map_bwamem.sh
 
 Purpose of the script: Map paired-end fastq files to a reference genome.
 
