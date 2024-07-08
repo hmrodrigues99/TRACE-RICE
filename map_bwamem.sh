@@ -4,7 +4,7 @@
 
 Script name: Variant_Enrichment.R
 
-Purpose of the script: Map paired-end fastq files to reference genome.
+Purpose of the script: Map paired-end fastq files to a reference genome.
 
 Author: Beatriz Vieira
 
@@ -25,10 +25,9 @@ Outputs: 1) Mapped varieties (.sam)
 
 ---------------------------------------------------------
 
-Required Tools
+Required Tool(s)
 
 bwa-mem (v0.7.17)
-samtools 
 
 ---------------------------------------------------------
 ```
@@ -45,22 +44,3 @@ echo "aligning ${variety}"
 bwa mem -t 10 ../../genome/Oryza_sativa.IRGSP-1.0.dna.toplevel.fa  ${variety}_1.fastq.gz ${variety}_2.fastq.gz > ${variety}.sam
 
 done
-
-# Convert SAM to BAM files
-while read f
-
-do
-
-variety="$(basename ${f%.*})"
-
-inp=${variety}.sam
-outp=${variety}.bam
-
-echo "converting ${inp} to ${outp}"
-
-cmd="samtools view -h -S -b -o  align_${variety}/${outp} align_${variety}/${inp}"
-$cmd
-
-done <$1
-
-
