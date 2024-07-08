@@ -18,7 +18,7 @@ Maria Beatriz, Hugo Rodrigues, Pedro Barros, Margarida Oliveira
 
 ---------------------------------------------------------
 
-Inputs: 1) SAM files in the same directory of script run
+Inputs: 1) Run script in directory above the align_{variety name} directories
 
 Outputs: 1) Mapped, sorted and indexed varieties (.bam)
 
