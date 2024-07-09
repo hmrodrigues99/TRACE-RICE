@@ -25,7 +25,7 @@ Maria Beatriz, Hugo Rodrigues, Pedro Barros, Margarida Oliveira
 
 Inputs: 1) align_{variety name} directories in the same directory of script run
 
-Outputs: 1) Mapped, sorted and indexed varieties (.bam)
+Outputs: 1) Sorted, marked duplicates and indexed varieties (.bam)
 
 ---------------------------------------------------------
 
