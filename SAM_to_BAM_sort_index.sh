@@ -6,10 +6,11 @@ Script name: SAM_to_BAM_sort_dups_index.sh
 
 Purpose of the script: Performs if set to TRUE:
                        1) Convert SAM to BAM format
-                       2) Add mate score tags
-                       3) Sorting
-                       4) Mark duplicates
-                       4) Indexing
+                       2) Computes BAM file statistics (samtools stats & flagstats)
+                       3) Add mate score tags
+                       4) Sorting
+                       5) Mark duplicates
+                       6) Indexing
 
 Author: Beatriz Vieira
 
@@ -38,6 +39,7 @@ samtools (v1.7)
 
 # Change to FALSE to disable option(s)
 SAM_to_BAM=TRUE
+BAM_stats=TRUE
 BAM_mark_duplicates=TRUE
 BAM_sort=TRUE
 BAM_index=TRUE
@@ -58,10 +60,26 @@ inp=${variety}.sam
 outp=${variety}.bam
 
 echo "converting ${inp} to ${outp}"
+cnv="samtools view -h -S -b -o  align_${variety}/${outp} align_${variety}/${inp}"
+echo ${cnv}
+$cnv
+fi
 
-cmd="samtools view -h -S -b -o  align_${variety}/${outp} align_${variety}/${inp}"
-echo ${cmd}
-$cmd
+# Compute BAM statistics
+# -------------------------------------------------------
+
+if [ $BAM_stats == TRUE ]
+then
+
+stats="samtools stats -@ 20 align_${variety}/${variety}.bam > align_${variety}/${variety}_stats.txt"
+echo ${stats}
+${stats}
+echo "stats results for ${variety} in ${variety}_stats.txt"
+
+flagstats="samtools flagstat align_${variety}/${variety}.bam > align_${variety}/${variety}_flagstats.txt"
+echo ${flagstats}
+${flagstats} 
+echo "flagstats results for ${variety} in ${variety}_flagstats.txt"
 fi
 
 # Add mate score tags to mark duplicates later
@@ -69,10 +87,10 @@ fi
 if [ $BAM_mark_duplicates == TRUE ]
 then
 
-cmdfix="samtools fixmate -m align_${variety}/${variety}.bam align_${variety}/${variety}.fix.bam"
-echo ${cmdfix}
-$cmdfix
-echo "fixmate for ${variety} worked"
+fix="samtools fixmate -m align_${variety}/${variety}.bam align_${variety}/${variety}_fix.bam"
+echo ${fix}
+$fix
+echo "fixmate results for ${variety} in ${variety}_fix.bam"
 fi
 
 # Sort BAM files
