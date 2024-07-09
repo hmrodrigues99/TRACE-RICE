@@ -29,7 +29,7 @@ Outputs: 1) Sorted, marked duplicates and indexed varieties (.bam)
 
 ---------------------------------------------------------
 
-Required Tool(s)
+Required Tool
 
 samtools (v1.7)
 
