@@ -45,6 +45,8 @@ do
 # Create a specific directory for each sample/variety
 variety=${i%_1.fastq.gz}
 mkdir align_${variety}
+# And a file listing all samples/directories created
+echo "align_${variety}.sam > sample_list.txt
 
 echo "aligning ${variety}"
 
