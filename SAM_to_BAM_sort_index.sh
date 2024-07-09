@@ -4,7 +4,7 @@
 
 Script name: SAM_to_BAM_sort_index.sh
 
-Purpose of the script: Convert SAM to BAM files, sort and index them.
+Purpose of the script: Provices options to convert SAM to BAM format, sorting and indexing.
 
 Author: Beatriz Vieira
 
@@ -18,7 +18,7 @@ Maria Beatriz, Hugo Rodrigues, Pedro Barros, Margarida Oliveira
 
 ---------------------------------------------------------
 
-Inputs: 1) Run script in directory above the align_{variety name} directories
+Inputs: 1) align_{variety name} directories in the same directory of script run
 
 Outputs: 1) Mapped, sorted and indexed varieties (.bam)
 
@@ -31,24 +31,35 @@ samtools (v1.7)
 ---------------------------------------------------------
 ```
 
-# For each .sam file within n align_{variety_name} directories
+# Change to FALSE to disable option(s)
+SAM_to_BAM=TRUE
+BAM_sort=TRUE
+BAM_index=TRUE
+
+# -------------------------------------------------------
+
 while read f
 
 do
 
-variety="$(basename ${f%.*})"
+# Convert SAM to BAM files
+if [ $SAM_to_BAM == TRUE ]
+then
 
 inp=${variety}.sam
 outp=${variety}.bam
 
-# Convert SAM to BAM files
 echo "converting ${inp} to ${outp}"
 
 cmd="samtools view -h -S -b -o  align_${variety}/${outp} align_${variety}/${inp}"
 echo ${cmd}
 $cmd
+fi
 
 # Sort BAM files
+if [ $BAM_sort == TRUE ]
+then
+
 inbam=${variety}.bam
 outsorted=${variety}.sorted
 
@@ -57,15 +68,19 @@ echo "sorting ${inbam} into ${outsorted}"
 cmdsort="samtools sort -o align_${variety}/${outsorted} align_${variety}/${inbam}"
 echo ${cmdsort}
 $cmdsort
+fi
 
 # Index BAM files
-insorted=${variety}.sorted
-indexed=${insorted}
+if [ $BAM_index == TRUE ]
+then
 
-echo "indexing ${insorted} into ${indexed}"
+insorted=${variety}.sorted
+
+echo "indexing ${insorted}"
 
 cmdindex="samtools index align_${variety}/${insorted}"
 echo ${cmdindex}
 $cmdindex
+fi
 
 done <$1
