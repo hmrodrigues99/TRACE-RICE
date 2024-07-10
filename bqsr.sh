@@ -36,8 +36,6 @@ gatk (v4.2.6.1)
 ref="./Oryza_sativa.IRGSP-1.0.dna.toplevel.fa"
 # Path to genome variants file
 varlist="../genomeVariants/oryza_sativa.vcf"
-# Path to GATK
-gatk="/home/mariabtv/bin/gatk-4.2.6.1/gatk-package-4.2.6.1-spark.jar"
 
 # -------------------------------------------------------
 
@@ -46,39 +44,18 @@ do
 
 variety="$(basename ${f%_*})"
 echo $variety
-outfile=align_${variety}/${variety}_dedup_recal_data.table
-bqfile=align_${variety}/${variety}_dedup_recal_data_$i.table
-output=align_${variety}/${variety}_dedup_recal_$i.bam
-
- gatk BaseRecalibratorSpark \
--R $ref \
--I align_${variety}/${variety}_dedup.bam \
--O $outfile \
--- --spark-runner LOCAL --spark-master local[40] \
---conf $gatk=$workPath
- gatk --java-options ▒-Xmx8G▒ ApplyBQSRSpark \
--R $ref \
--I align_${variety}/${variety}_dedup.bam \
--bqsr $bqfile \
---static-quantized-quals 10 --static-quantized-quals 20 \
---static-quantized-quals 30 -O $output \
--- --spark-runner LOCAL --spark-master local[40] \
---conf $gatk=$workPath
-
-outfile="align_${variety}/${variety}_RGdedup_recal_data.table"
-  gatk BaseRecalibrator \
-  -I align_${variety}/${variety}_dedup_recal_$i.bam \
-  -R $ref \
-  --known-sites $varlist \
-  -O $outfile \
-
 
 bqfile="align_${variety}/${variety}_RGdedup_recal_data.table"
-output="align_${variety}/${variety}_recalibrated.bam"
-
-  gatk ApplyBQSR \
+  gatk BaseRecalibrator \
+  -I ${f} \
   -R $ref \
-  -I align_${variety}/${variety}_RGdedup_recal_data.table \
+  --known-sites $varlist \
+  -O $bqfile \
+
+output="align_${variety}/${variety}_recalibrated.bam"
+  gatk ApplyBQSR \
+  -I ${f} \
+  -R $ref \
   --bqsr-recal-file $bqfile \
   -O ${output} \
 
