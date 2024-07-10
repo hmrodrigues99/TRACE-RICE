@@ -27,7 +27,7 @@ Outputs: 1) Recalibrated files (.bam)
 
 Required Tools
 
-gatk
+gatk (v4.2.6.1)
 
 ---------------------------------------------------------
 ```
@@ -37,7 +37,7 @@ ref="./Oryza_sativa.IRGSP-1.0.dna.toplevel.fa"
 # Path to genome variants file
 varlist="../genomeVariants/oryza_sativa.vcf"
 # Path to GATK
-gatk=""/home/mariabtv/bin/gatk-4.2.6.1/gatk-package-4.2.6.1-spark.jar""
+gatk="/home/mariabtv/bin/gatk-4.2.6.1/gatk-package-4.2.6.1-spark.jar"
 
 # -------------------------------------------------------
 
