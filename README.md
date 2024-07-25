@@ -47,4 +47,17 @@ GATK BaseRecalibrator
 ./bqsr.sh sample_list.txt
 ```
 
+GATK HaplotypeCaller
+```
+./haplotype_caller.sh
+```
 
+GATK CombineGVCFs & GenotypeGVCFs
+```
+./get_cohort_vcf.sh
+```
+
+Filter Variants using GATK SelectVariants & VariantFiltration
+```
+./filter_vcf.sh
+```
