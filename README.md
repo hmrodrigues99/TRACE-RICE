@@ -3,9 +3,10 @@ Collection of scripts used for the elaboration of the "TRACE-RICE" article.
 
 Required Tool(s)
 
+* bcftools (v1.7)
 * bwa-mem (v0.7.17)
-* samtools (v1.7)
 * docker (20.10.21) OR gatk (v4.1.3.0)
+* samtools (v1.7)
 * SnpEff (v5.1d)
 
 To run the script pipeline, do the following steps:
