@@ -1,6 +1,6 @@
 ## ---------------------------------------------------------
 ##
-## Script name: SNP_in_QTL.R
+## Script name: snp_in_qtl.R
 ##
 ## Purpose of the script: Attributes QTL labels to SNPs, if the SNP position
 ##                        occurs within one or more of the QTL regions provided.
