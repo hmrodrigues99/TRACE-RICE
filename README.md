@@ -6,6 +6,7 @@ Required Tool(s)
 * bwa-mem (v0.7.17)
 * samtools (v1.7)
 * docker (20.10.21) OR gatk (v4.1.3.0)
+* SnpEff (v5.1d)
 
 To run the script pipeline, do the following steps:
 
@@ -57,7 +58,19 @@ GATK CombineGVCFs & GenotypeGVCFs
 ./get_cohort_vcf.sh
 ```
 
-Filter Variants using GATK SelectVariants & VariantFiltration
+Filter variants using GATK SelectVariants & VariantFiltration
 ```
 ./filter_vcf.sh
 ```
+
+Annotating variants with SnpEff and obtain a HIGH impact SNP table
+```
+java -jar snpEff.jar -c /path_to/snpEff/snpEff.config -v Oryza_sativa PASS_cohort.vcf.gz > annotated_PASS_cohort.vcf
+java -jar SnpSift.jar filter "((ANN[*].IMPACT = 'HIGH'))" annotated_PASS_cohort.vcf > HIGH_PASS_cohort.vcf
+bcftools view -H HIGH_PASS_cohort.vcf > HIGH_PASS_cohort.tab
+```
+
+
+
+
+
