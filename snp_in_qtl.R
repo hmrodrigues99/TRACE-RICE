@@ -45,7 +45,7 @@ sample_list <- c("Chr", "Pos", "ID", "Ref", "Alt", "Qual", "Pass", "SnpEff", "Ge
                  "Giza177", "Giza181", "JSendra", "Lusitano", "Macarico",
                  "Manobi", "Puntal", "Ronaldo", "Super_Basmati", "Teti", "Ulisse")
 
-SNP_table <- read_delim("./rice_high_impact_variants.tab", delim="\t", col_names = sample_list)
+SNP_table <- read_delim("./HIGH_PASS_cohort.tab", delim="\t", col_names = sample_list)
 
 EQ_QTLs <- read_delim("./eatingqualityQTL.txt", col_names = c("Chr", "sPos", "ePos", "EQTL"))     # Eating quality QTLs
 EQ_QTLs <- EQ_QTLs[,1:4]
