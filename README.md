@@ -3,11 +3,9 @@ Collection of scripts used for the elaboration of the "TRACE-RICE" article.
 
 Required Tool(s)
 
-* bcftools (v1.7)
 * bwa-mem (v0.7.17)
 * docker (20.10.21) OR gatk (v4.1.3.0)
 * samtools (v1.7)
-* SnpEff (v5.1d)
 
 To run the script pipeline, do the following steps:
 
@@ -64,6 +62,11 @@ Filter variants using GATK SelectVariants & VariantFiltration
 ./filter_vcf.sh
 ```
 
+Required Tool(s)
+
+* bcftools (v1.7)
+* SnpEff (v5.1d)
+
 Annotating variants with SnpEff and obtain a HIGH impact SNP table
 ```
 java -jar snpEff.jar -c /path_to/snpEff/snpEff.config -v Oryza_sativa PASS_cohort.vcf.gz > annotated_PASS_cohort.vcf
@@ -75,10 +78,10 @@ QTL annotation and HIGH impact gene enrichment analysis
 ```
 # Command to download eatingqualityQTL.tab and seedQTL.tab files
 # Open scripts and change working directory and sample list as necessary
+# Install necessary packages if needed
 snp_in_qtl.R
 variant_enrichment.R
 ```
-
 
 
 
