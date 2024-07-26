@@ -1,6 +1,6 @@
 ## ---------------------------------------------------------
 ##
-## Script name: Variant_Enrichment.R
+## Script name: variant_enrichment.R
 ##
 ## Purpose of the script: Performs a gene enrichment analysis on a set of
 ##                        genes previously annotated to contain HIGH impact SNPs.
@@ -40,11 +40,13 @@ library(tidyverse)
 
 # Read High Impact Variant Table
 
-data <- read_delim("./rice_high_impact_variants.tab", delim="\t", col_names = c("Chr", "Pos", "ID", "Ref", "Alt", "Qual", "Pass", "SnpEff", "Genotype", 
-                                                                                "Albatros", "Arborio", "Arelate", "Ariete", "Basmati_TypeIII", "Bomba",
-                                                                                "CL28", "Caravela", "Carnaroli", "Elettra", "Gageron", "Giza177", "Giza181",
-                                                                                "JSendra", "Lusitano", "Macarico", "Manobi", "Puntal", "Ronaldo",
-                                                                                "Super_Basmati", "Teti", "Ulisse"))
+sample_list <- c("Chr", "Pos", "ID", "Ref", "Alt", "Qual", "Pass", "SnpEff", "Genotype",
+                 "Albatros", "Arborio", "Arelate", "Ariete", "Basmati_TypeIII",
+                 "Bomba", "CL28", "Caravela", "Carnaroli", "Elettra", "Gageron",
+                 "Giza177", "Giza181", "JSendra", "Lusitano", "Macarico",
+                 "Manobi", "Puntal", "Ronaldo", "Super_Basmati", "Teti", "Ulisse")
+
+data <- read_delim("./HIGH_PASS_cohort.tab", delim="\t", col_names = sample_list)
 
 # Get gene list
 annotations <- data['SnpEff']
