@@ -71,6 +71,13 @@ java -jar SnpSift.jar filter "((ANN[*].IMPACT = 'HIGH'))" annotated_PASS_cohort.
 bcftools view -H HIGH_PASS_cohort.vcf > HIGH_PASS_cohort.tab
 ```
 
+QTL annotation and HIGH impact gene enrichment analysis
+```
+# Command to download eatingqualityQTL.tab and seedQTL.tab files
+# Open scripts and change working directory and sample list as necessary
+snp_in_qtl.R
+variant_enrichment.R
+```
 
 
 
