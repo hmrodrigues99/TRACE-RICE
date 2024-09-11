@@ -74,9 +74,15 @@ java -jar SnpSift.jar filter "((ANN[*].IMPACT = 'HIGH'))" annotated_PASS_cohort.
 bcftools view -H HIGH_PASS_cohort.vcf > HIGH_PASS_cohort.tab
 ```
 
+Generating SNP density heatmaps
+```
+# Open script to change working directory if necessary
+heatmap.R
+```
+
 QTL annotation and HIGH impact gene enrichment analysis
 ```
-# Command to download eatingqualityQTL.tab and seedQTL.tab files
+# eatingqualityQTL.tab and seedQTL.tab files retrieved from SnpEff database
 # Open scripts and change working directory and sample list as necessary
 # Install necessary packages if needed
 snp_in_qtl.R
