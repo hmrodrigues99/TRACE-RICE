@@ -4,20 +4,15 @@ Collection of scripts used for the elaboration of the "TRACE-RICE" article.
 Required Tool(s)
 
 * bwa-mem (v0.7.17)
-* docker (20.10.21) OR gatk (v4.1.3.0)
+* gatk (v4.1.3.0) OR docker (20.10.21)
 * samtools (v1.7)
-
-To run the script pipeline, do the following steps:
 
 Download Data
 ```
-mkdir trace_testing
-# Example varieties
-wget Bomba
-wget Puntal
-# Oryza sativa genome and known variants
-wget Oryza_sativa.IRGSP-1.0.dna.toplevel.fa
-wget oryza_sativa.vcf.gz
+mkdir tracerice
+./getVarieties.sh   # this might take a while
+wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/fasta/oryza_sativa/dna/Oryza_sativa.IRGSP-1.0.dna.toplevel.fa.gz   # Oryza sativa reference genome
+wget https://ftp.ensemblgenomes.ebi.ac.uk/pub/plants/release-59/variation/vcf/oryza_sativa/oryza_sativa.vcf.gz   # known Oryza sativa variants
 ```
 
 Mapping and processing
@@ -34,7 +29,7 @@ samtools addreplacerg -r ID:Bomba -r LB:BombaLB -r SM:Bomba -r PL:ILLUMINA -o al
 samtools addreplacerg -r ID:Puntal -r LB:PuntalLB -r SM:Puntal -r PL:ILLUMINA -o Puntal_RGdedup.bam -O BAM Puntal_dedup.bam
 # Connect with GATK using Docker
 docker pull broadinstitute/gatk:latest
-docker run -v ~/trace_testing:/gatk/data -it broadinstitute/gatk:latest
+docker run -v ~/tracerice:/gatk/data -it broadinstitute/gatk:latest
 # Prepare required files
 samtools faidx Oryza_sativa.IRGSP-1.0.dna.toplevel.fa
 gatk CreateSequenceDictionary -R Oryza_sativa.IRGSP-1.0.dna.toplevel.fa
@@ -76,15 +71,14 @@ bcftools view -H HIGH_PASS_cohort.vcf > HIGH_PASS_cohort.tab
 
 Generating SNP density heatmaps
 ```
-# Open script to change working directory if necessary
+# Install necessary packages and open scripts to change working directory as needed
 heatmap.R
 ```
 
 QTL annotation and HIGH impact gene enrichment analysis
 ```
 # eatingqualityQTL.tab and seedQTL.tab files retrieved from SnpEff database
-# Open scripts and change working directory and sample list as necessary
-# Install necessary packages if needed
+# Install necessary packages and open scripts to change working directory and/or sample list as needed
 snp_in_qtl.R
 variant_enrichment.R
 ```
