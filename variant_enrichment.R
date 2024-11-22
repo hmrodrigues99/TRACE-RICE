@@ -19,7 +19,7 @@
 ##
 ## Inputs: 1) SNP table (tab-delimited) previously annotated using SnpEff
 ##
-## Output: 1) Plot highliting enriched GO:terms for the provided genes
+## Output: 1) Plot highlighting enriched GO:terms for the provided genes
 ##
 ## ---------------------------------------------------------
 
@@ -31,39 +31,34 @@ setwd("C:/Users/TRACE_Rice/Documents/Projects/RScripts")     # Change working di
 
 # Load Packages
 
-library(data.table)
+library(readr)
 library(gprofiler2)
-library(stringr)
-library(tidyverse)
+library(ggplot2)
+library(svglite)
 
 ## ---------------------------------------------------------
 
-# Read High Impact Variant Table
+# Read HIGH-impact gene list
 
-sample_list <- c("Chr", "Pos", "ID", "Ref", "Alt", "Qual", "Pass", "SnpEff", "Genotype",
-                 "Albatros", "Arborio", "Arelate", "Ariete", "Basmati_TypeIII",
-                 "Bomba", "CL28", "Caravela", "Carnaroli", "Elettra", "Gageron",
-                 "Giza177", "Giza181", "JSendra", "Lusitano", "Macarico",
-                 "Manobi", "Puntal", "Ronaldo", "Super_Basmati", "Teti", "Ulisse")
-
-data <- read_delim("./HIGH_PASS_cohort.tab", delim="\t", col_names = sample_list)
-
-# Get gene list
-annotations <- data['SnpEff']
-split_annotations <- as.data.frame(str_split_fixed(annotations$SnpEff, '\\|', 6))
-genes <- split_annotations[,5]
+genes <- read_lines(file = "genes_high_impact.txt")
 genes <- unique(genes)
 
-# Gene Enrichment Analysis (gprofiler2)
-gostres <- gost(query = genes, organism = "osativa", significant = TRUE)
+# Get gprofiler2 enrichment results
+gostres <- gost(query = genes, organism = "osativa", significant = TRUE, user_threshold = 0.05)
+data <- gostres$result
+# Get top 15 enriched terms
+data <- head(data, 15)
+# Removal of redundant terms
+data <- data[-c(2,5,6,7,9,12,13,15), ]
 
-# Check top 3 GO:terms
-head(gostres$result, 3)
+# Make plot
+p <- ggplot(data, aes(x = -log2(p_value), y = reorder(term_name, p_value))) +
+  geom_point(aes(size = intersection_size, color = source), stroke = 1) +
+  scale_size_continuous(range = c(1,10)) +
+  labs(x = "pvalue", y = "GO Term", size = "Count", color = "Category", title = "High Impact Genes Enrichment")
 
-# Uncomment for interactive use
-# gostplot(gostres, capped = TRUE, interactive = TRUE)
+# Add theme
+p <- p + theme(text = element_text(size = 15), axis.text.x = element_text(size = 10))
 
-# Generate Manhattan plot of the functional enrichment results
-p <- gostplot(gostres, capped = TRUE, interactive = FALSE)
-publish_gostplot(p, filename = "./HIGH_genes_top_enrichment_terms.png", width = 10, height = 6, 
-                 highlight_terms = c("GO:0006952", "GO:0044419", "GO:0043207"))
+# Save figure
+ggsave(filename = "enrichment_analysis.svg", width = 10, height = 8, dpi = 600)
