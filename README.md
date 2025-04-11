@@ -1,5 +1,9 @@
-# TRACE-RICE
-Collection of scripts used for the elaboration of the "TRACE-RICE" article.
+# Whole-genome polymorphisms and philogeny of rice varieties circulating in the European market
+Authors: Maria Beatriz Vieira, Hugo M. Rodrigues, Pedro M. Barros, M. Margarida Oliveira
+ITQB NOVA, Oeiras Portugal
+
+This repository holds all scripts created and used for the elaboration of the **Whole-genome polymorphisms and philogeny of rice varieties circulating in the European market** research article.
+*Currently under revision*
 
 Required Tool(s)
 
