@@ -13,7 +13,7 @@
 #
 # Author: Beatriz Vieira
 #
-# Date Created: 2024-??-??
+# Date Created: 2024
 #
 # Copyright (c) Beatriz Vieira, 2024
 # Email: marybtv@itqb.unl.pt
