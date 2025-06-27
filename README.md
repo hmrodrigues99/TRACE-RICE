@@ -1,8 +1,8 @@
-# Whole-genome polymorphisms and philogeny of rice varieties circulating in the European market
-Authors: Maria Beatriz Vieira, Hugo M. Rodrigues, Pedro M. Barros, M. Margarida Oliveira
+# Whole-genome polymorphisms and relatedness of rice varieties circulating in the Mediterranean market
+Authors: Hugo M. Rodrigues, M. Beatriz Vieira, Pedro M. Barros, M. Margarida Oliveira
 (ITQB NOVA, Oeiras Portugal)
 
-This repository holds all scripts created and used for the elaboration of the **Whole-genome polymorphisms and philogeny of rice varieties circulating in the European market** research article.
+This repository holds all scripts created and used for the elaboration of the **Whole-genome polymorphisms and relatedness of rice varieties circulating in the Mediterranean market** research article.
 *Currently under revision*
 
 Required Tool(s)
