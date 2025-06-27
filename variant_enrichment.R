@@ -25,7 +25,7 @@
 
 ## Set working directory
 
-setwd("C:/Users/TRACE_Rice/Documents/Projects/RScripts")     # Change working directory here
+setwd("C:/Users/TRACE_Rice/Projects/RScripts")     # Change working directory here
 
 ## ---------------------------------------------------------
 
