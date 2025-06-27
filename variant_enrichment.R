@@ -60,5 +60,6 @@ p <- ggplot(data, aes(x = -log2(p_value), y = reorder(term_name, p_value))) +
 # Add theme
 p <- p + theme(text = element_text(size = 15), axis.text.x = element_text(size = 10))
 
+
 # Save figure
 ggsave(filename = "enrichment_analysis.svg", width = 10, height = 8, dpi = 600)
