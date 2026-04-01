@@ -2,8 +2,7 @@
 Authors: Hugo M. Rodrigues, M. Beatriz Vieira, Pedro M. Barros, M. Margarida Oliveira
 (ITQB NOVA, Oeiras Portugal)
 
-This repository holds all scripts created and used for the elaboration of the **Whole-genome polymorphisms and relatedness of rice varieties circulating in the Mediterranean market** research article.
-*Currently under revision*
+This repository holds all scripts created and used for the elaboration of the **Whole-genome polymorphisms and relatedness of rice varieties circulating in the Mediterranean market** research article (Scientific Reports, doi:https://doi.org/10.1038/s41598-025-23999-5)
 
 Required Tool(s)
 
